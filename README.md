@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dépistage Urgences Ophtalmologiques</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .question-container {
+            display: none;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .active {
+            display: block;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            display: none;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .red {
+            background-color: #ffebee;
+            border: 2px solid #e53935;
+            color: #c62828;
+        }
+        .green {
+            background-color: #e8f5e9;
+            border: 2px solid #43a047;
+            color: #2e7d32;
+        }
+        .progress {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dépistage des urgences ophtalmologiques</h1>
+    <p>Ce questionnaire permet d'évaluer la nécessité d'une consultation urgente en ophtalmologie. Répondez avec précision.</p>
+
+    <div id="progress" class="progress">Question 1 sur 12</div>
+
+    <form id="ophthalmoForm">
+        <!-- Question 1 -->
+        <div class="question-container active" id="q1">
+            <p>1. Plaie délabrante visible ?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="R"> Oui</label>
+                <label><input type="radio" name="q1" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" disabled>Précédent</button>
+                <button type="button" onclick="nextQuestion(1)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-container" id="q2">
+            <p>2. Saignement actif ?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="R"> Oui</label>
+                <label><input type="radio" name="q2" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(2)">Précédent</button>
+                <button type="button" onclick="nextQuestion(2)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-container" id="q3">
+            <p>3. Anisocorie (asymétrie des pupilles) avec paralysie oculomotrice brutale ?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="R"> Oui</label>
+                <label><input type="radio" name="q3" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(3)">Précédent</button>
+                <button type="button" onclick="nextQuestion(3)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-container" id="q4">
+            <p>4. Êtes-vous adressé par un ophtalmologiste ?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="R"> Oui</label>
+                <label><input type="radio" name="q4" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(4)">Précédent</button>
+                <button type="button" onclick="nextQuestion(4)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-container" id="q5">
+            <p>5. Avez-vous reçu un corps étranger dans l'œil (limaille, copeau de bois, etc.) ou avez-vous soudé (coup d'arc) ?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="V"> Oui</label>
+                <label><input type="radio" name="q5" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(5)">Précédent</button>
+                <button type="button" onclick="nextQuestion(5)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-container" id="q6">
+            <p>6. Avez-vous reçu un choc sur l'œil ?</p>
+            <div class="options">
+                <p><strong>Choc à basse vitesse</strong> (doigt, feuille d'arbre...)</p>
+                <label><input type="radio" name="q6" value="V"> Oui</label>
+                
+                <p><strong>Choc à haute cinétique</strong> (coup de poing, objet tranchant...)</p>
+                <label><input type="radio" name="q6" value="R"> Oui</label>
+                
+                <label><input type="radio" name="q6" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(6)">Précédent</button>
+                <button type="button" onclick="nextQuestion(6)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-container" id="q7">
+            <p>7. Avez-vous reçu un produit chimique dans l'œil ?</p>
+            <div class="options">
+                <p><strong>Peu abrasif</strong> (shampoing, eau de piscine...)</p>
+                <label><input type="radio" name="q7" value="V"> Oui</label>
+                
+                <p><strong>Abrasif/basique</strong> (Javel, acide, chaux...)</p>
+                <label><input type="radio" name="q7" value="R"> Oui</label>
+                
+                <label><input type="radio" name="q7" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(7)">Précédent</button>
+                <button type="button" onclick="nextQuestion(7)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-container" id="q8">
+            <p>8. Antécédent de décollement de rétine avec symptômes actuels (flashes, "mouches volantes") ?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="R"> Oui</label>
+                <label><input type="radio" name="q8" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(8)">Précédent</button>
+                <button type="button" onclick="nextQuestion(8)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-container" id="q9">
+            <p>9. Baisse de l'acuité visuelle ?</p>
+            <div class="options">
+                <p><strong>Progressive/ancienne</strong></p>
+                <label><input type="radio" name="q9" value="V"> Oui</label>
+                
+                <p><strong>Brutale/profonde</strong> (en moins de 3 jours)</p>
+                <label><input type="radio" name="q9" value="R"> Oui</label>
+                
+                <label><input type="radio" name="q9" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(9)">Précédent</button>
+                <button type="button" onclick="nextQuestion(9)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-container" id="q10">
+            <p>10. Amputation du champ visuel (tache noire, perte d'un quadrant) ?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="R"> Oui</label>
+                <label><input type="radio" name="q10" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(10)">Précédent</button>
+                <button type="button" onclick="nextQuestion(10)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question-container" id="q11">
+            <p>11. Vision double persistante ?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="R"> Oui</label>
+                <label><input type="radio" name="q11" value="V"> Non</label>
+            </div>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(11)">Précédent</button>
+                <button type="button" onclick="nextQuestion(11)">Suivant</button>
+            </div>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question-container" id="q12">
+            <p>12. Intensité de la douleur (0 = aucune, 10 = maximale) ?</p>
+            <input type="range" min="0" max="10" value="0" class="slider" id="painScale">
+            <p>Valeur: <span id="painValue">0</span>/10</p>
+            <p><em>> 4/10 : nécessite un traitement antalgique</em></p>
+            <div class="navigation">
+                <button type="button" onclick="prevQuestion(12)">Précédent</button>
+                <button type="button" onclick="evaluateResponses()">Terminer l'évaluation</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        // Gestion de l'échelle de douleur
+        const painSlider = document.getElementById("painScale");
+        const painValue = document.getElementById("painValue");
+        painSlider.oninput = function() {
+            painValue.innerHTML = this.value;
+        };
+
+        // Navigation entre les questions
+        function nextQuestion(current) {
+            const currentQuestion = document.getElementById(`q${current}`);
+            const nextQuestion = document.getElementById(`q${current + 1}`);
+            
+            if (current < 12) {
+                currentQuestion.classList.remove("active");
+                nextQuestion.classList.add("active");
+                document.getElementById("progress").textContent = `Question ${current + 1} sur 12`;
+            }
+        }
+
+        function prevQuestion(current) {
+            const currentQuestion = document.getElementById(`q${current}`);
+            const prevQuestion = document.getElementById(`q${current - 1}`);
+            
+            if (current > 1) {
+                currentQuestion.classList.remove("active");
+                prevQuestion.classList.add("active");
+                document.getElementById("progress").textContent = `Question ${current - 1} sur 12`;
+            }
+        }
+
+        // Fonction d'évaluation
+        function evaluateResponses() {
+            let hasRed = false;
+            
+            // Vérifier toutes les questions (q1 à q11)
+            for (let i = 1; i <= 11; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                
+                if (selectedOption && selectedOption.value === "R") {
+                    hasRed = true;
+                    break;
+                }
+            }
+            
+            // Masquer toutes les questions
+            document.querySelectorAll('.question-container').forEach(q => {
+                q.classList.remove('active');
+            });
+            
+            // Afficher le résultat
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+            
+            if (hasRed) {
+                resultDiv.className = "red";
+                resultDiv.innerHTML = `
+                    <h2>Situation à risque</h2>
+                    <p>Vos réponses indiquent une situation nécessitant une évaluation urgente.</p>
+                    <p><strong>Consignes :</strong></p>
+                    <ul style="text-align: left; margin-left: 20px;">
+                        <li>Contactez immédiatement le service d'ophtalmologie du CHU d'Amiens</li>
+                        <li>Téléphone : <strong>03 22 08 89 70</strong></li>
+                        <li>Présentez-vous aux urgences ophtalmologiques dès que possible</li>
+                        <li>Évitez de conduire vous-même si votre vision est altérée</li>
+                    </ul>
+                `;
+            } else {
+                resultDiv.className = "green";
+                resultDiv.innerHTML = `
+                    <h2>Aucun signe d'urgence immédiate</h2>
+                    <p>Vos réponses ne suggèrent pas de situation nécessitant une prise en charge urgente.</p>
+                    <p><strong>Consignes :</strong></p>
+                    <ul style="text-align: left; margin-left: 20px;">
+                        <li>Consultez un ophtalmologiste pour une consultation de suivi</li>
+                        <li>Surveillez l'apparition de nouveaux symptômes</li>
+                        <li>En cas d'aggravation, refaites ce questionnaire ou contactez un professionnel de santé</li>
+                        <li>Pour la douleur > 4/10, prenez un antalgique adapté</li>
+                    </ul>
+                `;
+            }
+            
+            // Faire défiler jusqu'au résultat
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
